@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import TaskItem from './task-item';
+import { connect } from 'react-redux';
 
 class Tasks extends Component {
   render() {
@@ -7,7 +8,7 @@ class Tasks extends Component {
       <ul>
         {
           this.props.tasks.map((task) => {
-            return <TaskItem key={task} task={task} activateTask={this.props.activateTask} removeTask={this.props.removeTask} />
+            return <TaskItem key={task.title} task={task.title} activateTask={this.props.activateTask} removeTask={this.props.removeTask} />
           })
         }
       </ul>
@@ -15,4 +16,10 @@ class Tasks extends Component {
   }
 }
 
-export default Tasks;
+function mapStateToProps(state) {
+  return {
+    tasks: state.tasks
+  }
+}
+
+export default connect(mapStateToProps)(Tasks);

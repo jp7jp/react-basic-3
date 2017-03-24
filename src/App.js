@@ -6,12 +6,6 @@ import './App.css';
 
 class App extends Component {
 
-  state = {
-    tasks: ['Wake up', 'Lunch', 'Sleep'],
-    activeTask: null,
-    newTask: ''
-  }
-
   activateTask(task) {
     this.setState({
       activeTask: task
@@ -46,11 +40,11 @@ class App extends Component {
           <h2>Task Manager</h2>
         </div>
         <h3>Current Tasks</h3>
-        <Tasks tasks={this.state.tasks} activateTask={this.activateTask.bind(this)} removeTask={this.removeTask.bind(this)} />
+        <Tasks activateTask={this.activateTask.bind(this)} removeTask={this.removeTask.bind(this)} />
         <h3>Active Task</h3>
-        <ActiveTask task={this.state.activeTask} />
+        <ActiveTask />
         <h3>Add New Task</h3>
-        <TaskForm newTask={this.state.newTask} updateNewTaskValue={this.updateNewTaskValue.bind(this)} addTask={this.addTask.bind(this)} />
+        <TaskForm updateNewTaskValue={this.updateNewTaskValue.bind(this)} addTask={this.addTask.bind(this)} />
       </div>
     );
   }
