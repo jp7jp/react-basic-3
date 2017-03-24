@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import TaskItem from './task-item';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectTask } from '../actions';
 
 class Tasks extends Component {
   render() {
@@ -8,7 +10,7 @@ class Tasks extends Component {
       <ul>
         {
           this.props.tasks.map((task) => {
-            return <TaskItem key={task.title} task={task.title} activateTask={this.props.activateTask} removeTask={this.props.removeTask} />
+            return <TaskItem key={task.id} task={task} selectTask={this.props.selectTask} />
           })
         }
       </ul>
@@ -22,4 +24,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Tasks);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    selectTask: selectTask
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tasks);

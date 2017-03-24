@@ -1,3 +1,8 @@
 export const activeTaskReducer = (state = null, action) => {
-  return state;
+  switch (action.type) {
+    case 'SELECT_TASK':
+      return action.payload;
+    default:
+      return state;
+  }
 }

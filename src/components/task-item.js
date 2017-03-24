@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class TaskItem extends Component {
 
   handleClick() {
-    this.props.activateTask(this.props.task);
+    this.props.selectTask(this.props.task);
   }
 
   handleRemoveClick() {
@@ -15,7 +15,7 @@ class TaskItem extends Component {
       <li>
         <span onClick={this.handleRemoveClick.bind(this)} style={{ color: 'red' }}>X</span>
         &nbsp;
-        <span onClick={this.handleClick.bind(this)}>{this.props.task}</span>
+        <span onClick={this.handleClick.bind(this)}>{this.props.task.title}</span>
       </li>
     );
   }
