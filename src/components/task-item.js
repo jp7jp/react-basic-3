@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class TaskItem extends Component {
 
@@ -15,7 +16,7 @@ class TaskItem extends Component {
       <li>
         <span onClick={this.handleRemoveClick.bind(this)} style={{ color: 'red' }}>X</span>
         &nbsp;
-        <span onClick={this.handleClick.bind(this)}>{this.props.task.title}</span>
+        <Link to={`/tasks/${this.props.task.id}`} onClick={this.handleClick.bind(this)}>{this.props.task.title}</Link>
       </li>
     );
   }

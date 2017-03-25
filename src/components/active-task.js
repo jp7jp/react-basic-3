@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { selectTask } from '../actions';
 
 class ActiveTask extends Component {
+
+  componentWillMount() {
+    const task = this.props.tasks.find((task) => (task.id === parseInt(this.props.match.params.activeTaskId, 10)));
+    if (task) {
+      this.props.selectTask(task);
+    }
+  }
+
   render() {
     if (!this.props.activeTask) {
       return (
@@ -17,8 +26,9 @@ class ActiveTask extends Component {
 
 function mapStateToProps(state) {
   return {
+    tasks: state.tasks,
     activeTask: state.activeTask
   }
 }
 
-export default connect(mapStateToProps)(ActiveTask);
+export default connect(mapStateToProps, { selectTask })(ActiveTask);
