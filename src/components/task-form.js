@@ -1,35 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { addTask } from '../actions';
+import { connect } from 'react-redux';
+import { Field, reduxForm, reset } from 'redux-form';
 
 class TaskForm extends Component {
 
-  state = {
-    title: ''
-  }
+  handleOnSubmit(values) {
+    this.props.addTask(values)
+    this.props.reset();
 
-  handleOnSubmit(e) {
-    e.preventDefault();
-    this.props.addTask(this.state.title);
-    console.log(this.state.title);
-    this.setState({
-      title: ''
-    });
-
-  }
-
-  handleOnChange(e) {
-    this.setState({
-      title: e.target.value
-    });
   }
 
   render() {
+    const { handleSubmit, pristine, submitting } = this.props;
     return (
-      <form onSubmit={this.handleOnSubmit.bind(this)}>
-        <input type="text" value={this.state.title} onChange={this.handleOnChange.bind(this)} />
-        <input type="submit" />
+      <form onSubmit={handleSubmit(this.handleOnSubmit.bind(this))}>
+        <Field name="title" component="input" type="text" placeholder="First Name"/>
+        <button type="submit" disabled={pristine || submitting}>Submit</button>
       </form>
     );
   }
@@ -41,10 +28,13 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    addTask: addTask
-  }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({
+//     addTask: addTask
+//   }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);
+TaskForm = connect(mapStateToProps, { addTask })(TaskForm);
+export default reduxForm({
+  form: 'addTask',
+})(TaskForm);
