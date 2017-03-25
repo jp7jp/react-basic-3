@@ -9,7 +9,6 @@ const initialState = [
 export const tasksReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_TASK:
-      console.log(action.payload);
       const newTask = {
         id: state.length + 1,
         title: action.payload.title
