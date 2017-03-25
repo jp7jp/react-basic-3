@@ -1,4 +1,4 @@
-import { ADD_TASK } from '../actions/';
+import { ADD_TASK, REMOVE_TASK } from '../actions/';
 
 const initialState = [
   {id: 1, title: 'Wake up'},
@@ -14,6 +14,9 @@ export const tasksReducer = (state = initialState, action) => {
         title: action.payload
       }
       return [ ...state, newTask ];
+    case REMOVE_TASK:
+      const index = state.findIndex((obj) => obj.title === action.payload.title);
+      return [...state.slice(0, index), ...state.slice(index + 1)];
     default:
       return state;
   }
