@@ -1,14 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addTask } from '../actions';
 
 class TaskForm extends Component {
 
+  state = {
+    title: ''
+  }
+
   handleOnSubmit(e) {
     e.preventDefault();
-    this.props.addTask(this.props.newTask);
+    this.props.addTask(this.state.title);
+    this.setState({
+      title: ''
+    });
+
   }
 
   handleOnChange(e) {
-    this.props.updateNewTaskValue(e.target.value);
+    this.setState({
+      title: e.target.value
+    });
   }
 
   render() {
@@ -21,4 +34,16 @@ class TaskForm extends Component {
   }
 }
 
-export default TaskForm;
+function mapStateToProps(state) {
+  return {
+    newTask: state.newTask
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    addTask: addTask
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

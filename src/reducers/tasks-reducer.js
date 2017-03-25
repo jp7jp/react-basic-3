@@ -1,3 +1,5 @@
+import { ADD_TASK } from '../actions/';
+
 const initialState = [
   {id: 1, title: 'Wake up'},
   {id: 2, title: 'Lunch'},
@@ -5,5 +7,14 @@ const initialState = [
 ]
 
 export const tasksReducer = (state = initialState, action) => {
-  return state;
+  switch(action.type) {
+    case ADD_TASK:
+      const newTask = {
+        id: state.length + 1,
+        title: action.payload
+      }
+      return [ ...state, newTask ];
+    default:
+      return state;
+  }
 }
