@@ -10,7 +10,7 @@ https://jpbarbosa.github.io/fibonacci
 
 Scroll up/down to change the sequence length.
 
-<img src="https://github.com/jpbarbosa/react-basic-3/blob/master/src/VisualFibonacci.gif" width="50%" alt="Visual Fibonacci">
+<a href="https://jpbarbosa.github.io/fibonacci" target="_blank"><img src="https://github.com/jpbarbosa/react-basic-3/blob/master/src/VisualFibonacci.gif" width="50%" alt="Visual Fibonacci"></a>
 
 ## Definition
 
